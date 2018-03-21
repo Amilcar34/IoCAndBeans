@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="auto" class="com.amilcar.modelo.Auto">
+	</bean>
+	
+	<bean id="audi" class="com.amilcar.modelo.Auto" scope="singleton">
+		<property name="marca" value="audi"></property>
+		<property name="modelo" value="TT"></property>
+		<property name="color" value="rojo"></property>
+		<property name="motor" ref="motor"></property>
+	</bean>
+	
+	<bean id="motor" class="com.amilcar.modelo.Motor" lazy-init="true" scope="prototype">
+		<property name="tipo" value="gasolero"></property>
+		<property name="caballosF" value="8"></property>
+	</bean>
+	
+	<bean id="motorDiesel" class="com.amilcar.modelo.Motor">
+		<constructor-arg name="caballosF" value="1.8" index="0"/>
+		<constructor-arg name="tipo" value="diesel" index="1"/>
+	</bean>
+	
+	<bean id="autoMotor" class="com.amilcar.modelo.Auto">
+		<constructor-arg name="color" value="Verde" index="0"/>
+		<constructor-arg name="modelo" value="er5" index="1"/>
+		<constructor-arg name="marca" value="Renault" index="2"/>
+		<constructor-arg name="motor" ref="motorDiesel" index="3"/>
+	</bean>
+</beans>
